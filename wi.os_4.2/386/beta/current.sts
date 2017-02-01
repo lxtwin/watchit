@@ -1,0 +1,15 @@
+[shared-]
+	pmark=
+	version=2
+[debug-]
+	target="/u/watchit/source/v3.0/unix/wi.os_4.2/386/beta/lock"
+[cv]
+	wndstate=0 1 0 2 0 0 0 0 0 0 254
+	tilestate=1 42 0 80 0 0 0 0 0 21 0 0 0 0 0 0 0 254
+	command=use auto
+	command=n10
+	command=s1
+	command=oc+
+	command=of+
+	command=oi+
+	command=oe+

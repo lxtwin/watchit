@@ -1,0 +1,65 @@
+
+int ffast = FALSE;
+
+
+		doupdate();
+
+		/*
+			Set up the signal handler
+		*/
+		cmd = 0;
+		if (ffast == TRUE) {
+			nap(400);
+			if (rdchk(0))
+				cmd = wgetch(bottom_win);
+		} else {
+			if (signal(SIGALRM, sig_alrm_proc) == SIG_ERR)
+				printf("\nsignal(SIGALRM) error\n");
+
+			alarm(naptime);	/* set the alarm timer */
+			if ((cmd = wgetch(bottom_win)) < 0) {
+				alarm(0);			/* stop the alarm timer */
+			} else {
+				alarm(0);			/* stop the alarm timer */
+			}
+		}
+
+		if (cmd != 0) {
+			switch(cmd) {
+			case -1 :
+				break;
+
+				ffast = FALSE;
+
+			case 'F' :
+				ffast = TRUE;
+				naptime = -1;
+				drawdisp(27);
+				Set_Colour(main_win, Red_Blink_Banner);
+				mvwaddstr(main_win, 0, 72, "Fast");
+				Set_Colour(main_win, Normal);
+				Sleep_Time_Flag = FALSE;
+				break;
+
+			case 'f' :
+				ffast = FALSE;
+				drawdisp(27);
+				Set_Colour(main_win, Blink_Banner);
+				mvwaddstr(main_win, 0, 72, "Fast");
+				Set_Colour(main_win, Normal);
+				naptime = 1;
+				Sleep_Time_Flag = FALSE;
+				break;
+
+
+					if (naptime == 4)
+						mvwaddstr(main_win, 0, 63, "Slow");
+					else if (naptime == 2)
+						mvwaddstr(main_win, 0, 68, "Med");
+					else if (naptime == 1)
+						mvwaddstr(main_win, 0, 72, "Fast");
+					else {
+						Set_Colour(main_win, Red_Blink_Banner);
+						mvwaddstr(main_win, 0, 72, "Fast");
+					}
+
